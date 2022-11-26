@@ -1,0 +1,17 @@
+rootProject.name = 'POLApp'
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+include ':react-native-signature-capture'
+project(':react-native-signature-capture').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-signature-capture/android')
+include ':react-native-signature-capture'
+project(':react-native-signature-capture').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-signature-capture/android')
+include ':react-native-signature-capture'
+project(':react-native-signature-capture').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-signature-capture/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+
+include ':app'
