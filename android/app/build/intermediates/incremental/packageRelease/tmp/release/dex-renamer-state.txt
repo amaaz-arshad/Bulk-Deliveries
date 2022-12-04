@@ -1,7 +1,0 @@
-#Thu Dec 23 05:47:30 PKT 2021
-base.0=C\:\\Users\\LENOVO\\react native projects\\POL_React_Native\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
-path.1=classes2.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=C\:\\Users\\LENOVO\\react native projects\\POL_React_Native\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
