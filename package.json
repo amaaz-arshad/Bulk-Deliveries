@@ -24,7 +24,7 @@
     "native-base": "^2.15.2",
     "radio-buttons-react-native": "^1.0.4",
     "react": "17.0.1",
-    "react-native": "0.64.2",
+    "react-native": "0.64.4",
     "react-native-ble-manager": "^7.6.0",
     "react-native-bluetooth-escpos-printer": "0.0.5",
     "react-native-check-box": "^2.1.7",

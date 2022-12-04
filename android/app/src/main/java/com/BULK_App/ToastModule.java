@@ -58,8 +58,8 @@ public class ToastModule extends ReactContextBaseJavaModule {
             String vps, String vpe, String vpu, String vls, String vle, String vlu,
             String tps, String tpe, String tpu, String tls, String tle, String tlu,
             String cs, String ce, String cu,
-            String tdlsno, String schdate, String custname, String custno,
-            String primary, String productname, String vehicleno,
+            String bttrno,String tdlsno, String schdate, String custname, String custno,
+            String vie, String primary, String productname, String vehicleno,
             String decantername, String drivername, String timein, String timeout,
             String odometerin, String odometerout, String check, String netweight,
             String deliveredvolume, String comments,
@@ -70,10 +70,12 @@ public class ToastModule extends ReactContextBaseJavaModule {
         Intent intent = new Intent(activity, PrintListActivity.class);
 //        Intent intent = new Intent("print");
 
+        intent.putExtra("bttrno", bttrno);
         intent.putExtra("tdlsno", tdlsno);
         intent.putExtra("scheduledate", schdate);
         intent.putExtra("customername", custname);
         intent.putExtra("customerno", custno);
+        intent.putExtra("vie", vie);
         intent.putExtra("primaryproduct", primary);
         intent.putExtra("productname", productname);
         intent.putExtra("vehicleno", vehicleno);

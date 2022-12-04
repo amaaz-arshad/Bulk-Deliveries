@@ -452,6 +452,12 @@ export default class TDLSListingDecentre extends Component {
   }
 
   print() {
+    function convertDateString(dateStr) {
+      if (!dateStr || isNaN(new Date(dateStr).getTime())) return '\n';
+      let date = moment(dateStr).local().format('YYYY-MM-DD hh:mm:ss a');
+      return date + '\n';
+    }
+
     let viePressUnit = this.state.printData.vie_press_start_unit + '\n';
     let vieLevelUnit =
       this.state.printData.vie_level_start_unit +
@@ -465,18 +471,20 @@ export default class TDLSListingDecentre extends Component {
       '\n' +
       '------------------------------------------------' +
       '\n';
+    let bttrno = this.state.printData.BTTR_No + '\n';
     let tdlsno = this.state.printData.TDLS_No + '\n';
     let scheduledate = this.state.printData.ScheduledDate + '\n';
     let customerno = this.state.printData.CustomerNo + '\n';
     let customername = this.state.printData.CustomerName + '\n';
     let primaryproduct = this.state.printData.PrimaryProduct + '\n';
+    let vie = this.state.printData.TankerShortName + '\n';
     let productname = this.state.printData.ProductName + '\n';
     let vehiclenum = this.state.printData.vehicleno + '\n';
     let decantername = this.state.printData.DecanterName + '\n';
     let drivername = this.state.printData.DriverName + '\n';
-    let timein = this.state.printData.datein + '\n';
+    let timein = convertDateString(this.state.printData.datein);
     let inodometer = this.state.printData.odometerin + '\n';
-    let timeout = this.state.printData.dateout + '\n';
+    let timeout = convertDateString(this.state.printData.dateout);
     let outodometer =
       this.state.printData.odometerout +
       '\n' +
@@ -508,10 +516,9 @@ export default class TDLSListingDecentre extends Component {
       ' ' +
       this.state.printData.uom +
       '\n';
-    let comments =
-      this.state.printData.Additional_Remarks + '\n'
-        ? this.state.printData.Additional_Remarks
-        : '' + '\n';
+    let comments = this.state.printData.Additional_Remarks
+      ? this.state.printData.Additional_Remarks
+      : '\n';
     let sig =
       this.state.printData.Signature.length > 100
         ? this.state.printData.Signature
@@ -524,7 +531,9 @@ export default class TDLSListingDecentre extends Component {
     console.log(tankerPressUnit);
     console.log(tankerLevelUnit);
     console.log(contentUnit);
+    console.log('bttrno:', bttrno);
     console.log(tdlsno);
+    console.log('vie:', vie);
     console.log('diff: ', diff);
     console.log('net weight: ', netweight);
     console.log('deliveredvolume: ', deliveredvolume);
@@ -554,10 +563,12 @@ export default class TDLSListingDecentre extends Component {
       this.state.printData.tanker_content_start + '',
       this.state.printData.tanker_content_end + '',
       contentUnit,
+      bttrno,
       tdlsno,
       scheduledate,
       customername,
       customerno,
+      vie,
       primaryproduct,
       productname,
       vehiclenum,
@@ -1375,6 +1386,8 @@ export default class TDLSListingDecentre extends Component {
               location={item.CustomerName}
               product={item.ProductName}
               status={item.Trip_StatusDec}
+              statusNo={item.Trip_Status}
+              tankerName={item.TankerShortName}
               touchView={() =>
                 ToastAndroid.show(item.id + '', ToastAndroid.SHORT)
               }

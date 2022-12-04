@@ -569,9 +569,16 @@ public class PrintListActivity extends Activity {
 
         InputStream inStream34 = new ByteArrayInputStream(endMsg.getBytes());
 
-        String tdlsstring =
-                "------------------------------------------------" + "\n" + "TDLS No:";
-        InputStream inStream35 = new ByteArrayInputStream(tdlsstring.getBytes());
+        String bttrString =
+                "------------------------------------------------" + "\n" + "BTTR No:";
+        InputStream inStreamBttr1 = new ByteArrayInputStream(bttrString.getBytes());
+
+        String bttrno = getIntent().getStringExtra("bttrno");
+        InputStream inStreamBttr2 = new ByteArrayInputStream(bttrno.getBytes());
+
+        // String tdlsstring =
+        //         "------------------------------------------------" + "\n" + "TDLS No:";
+        InputStream inStream35 = new ByteArrayInputStream("TDLS No:".getBytes());
 
         String tdlsno = getIntent().getStringExtra("tdlsno");
         InputStream inStream36 = new ByteArrayInputStream(tdlsno.getBytes());
@@ -590,6 +597,10 @@ public class PrintListActivity extends Activity {
 
         String customername = getIntent().getStringExtra("customername");
         InputStream inStream42 = new ByteArrayInputStream(customername.getBytes());
+
+        InputStream inStreamVie1 = new ByteArrayInputStream("VIE:".getBytes());
+        String vie = getIntent().getStringExtra("vie");
+        InputStream inStreamVie2 = new ByteArrayInputStream(vie.getBytes());
 
         InputStream inStream43 = new ByteArrayInputStream("Product Code:".getBytes());
 
@@ -694,6 +705,18 @@ public class PrintListActivity extends Activity {
             //     sendData(data);
             // }
 
+            data = new byte[inStreamBttr1.available()];
+            while (inStreamBttr1.read(data) != -1) {
+                sendData(WoosimCmd.setTextStyle(true, false, false, 1, 1));
+                sendData(data);
+                sendData(WoosimCmd.moveAbsPosition(225));
+            }
+            data = new byte[inStreamBttr2.available()];
+            while (inStreamBttr2.read(data) != -1) {
+                sendData(WoosimCmd.setTextStyle(false, false, false, 1, 1));
+                sendData(data);
+            }
+
             data = new byte[inStream35.available()];
             while (inStream35.read(data) != -1) {
                 sendData(WoosimCmd.setTextStyle(true, false, false, 1, 1));
@@ -706,17 +729,17 @@ public class PrintListActivity extends Activity {
                 sendData(data);
             }
 
-            data = new byte[inStream37.available()];
-            while (inStream37.read(data) != -1) {
-                sendData(WoosimCmd.setTextStyle(true, false, false, 1, 1));
-                sendData(data);
-                sendData(WoosimCmd.moveAbsPosition(225));
-            }
-            data = new byte[inStream38.available()];
-            while (inStream38.read(data) != -1) {
-                sendData(WoosimCmd.setTextStyle(false, false, false, 1, 1));
-                sendData(data);
-            }
+            // data = new byte[inStream37.available()];
+            // while (inStream37.read(data) != -1) {
+            //     sendData(WoosimCmd.setTextStyle(true, false, false, 1, 1));
+            //     sendData(data);
+            //     sendData(WoosimCmd.moveAbsPosition(225));
+            // }
+            // data = new byte[inStream38.available()];
+            // while (inStream38.read(data) != -1) {
+            //     sendData(WoosimCmd.setTextStyle(false, false, false, 1, 1));
+            //     sendData(data);
+            // }
 
             data = new byte[inStream39.available()];
             while (inStream39.read(data) != -1) {
@@ -738,6 +761,18 @@ public class PrintListActivity extends Activity {
             }
             data = new byte[inStream42.available()];
             while (inStream42.read(data) != -1) {
+                sendData(WoosimCmd.setTextStyle(false, false, false, 1, 1));
+                sendData(data);
+            }
+
+            data = new byte[inStreamVie1.available()];
+            while (inStreamVie1.read(data) != -1) {
+                sendData(WoosimCmd.setTextStyle(true, false, false, 1, 1));
+                sendData(data);
+                sendData(WoosimCmd.moveAbsPosition(225));
+            }
+            data = new byte[inStreamVie2.available()];
+            while (inStreamVie2.read(data) != -1) {
                 sendData(WoosimCmd.setTextStyle(false, false, false, 1, 1));
                 sendData(data);
             }

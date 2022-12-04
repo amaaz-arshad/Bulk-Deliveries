@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {colors} from '../../config';
 import {Card} from 'react-native-shadow-cards';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TDLSItemView = props => {
   return (
@@ -26,7 +27,7 @@ const TDLSItemView = props => {
               {props.tdlsNo}
             </Text>
           </View>
-          {props.status == 'Unblocked' || props.status == 'Scheduled' ? null : (
+          {props.statusNo == 1 || props.statusNo == 3 ? null : (
             <TouchableOpacity onPress={props.print}>
               <Image
                 source={require('../../assets/tdlslistitem/print.png')}
@@ -62,6 +63,22 @@ const TDLSItemView = props => {
             {props.location}
           </Text>
         </View>
+
+        {/* tanker */}
+        {props.tankerName ? (
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 3}}>
+            <Icon
+              name="tanker-truck"
+              size={18}
+              color="rgb(83, 83, 83)"
+              style={{marginRight: 12}}
+            />
+            <Text style={[styles.allTextStyle, {marginEnd: 15}]}>
+              {props.tankerName}
+            </Text>
+          </View>
+        ) : null}
 
         {/* Product */}
         <View

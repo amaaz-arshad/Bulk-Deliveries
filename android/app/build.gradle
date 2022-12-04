@@ -109,7 +109,9 @@ def enableProguardInReleaseBuilds = false
  * give correct results when using with locales other than en-US.  Note that
  * this variant is about 6MiB larger per architecture than default.
  */
+
 def jscFlavor = 'org.webkit:android-jsc:+'
+// def jscFlavor = 'org.webkit:android-jsc-intl:+' // this line added for date locale string problem
 
 /**
  * Whether to enable the Hermes VM.
@@ -134,8 +136,8 @@ android {
         applicationId "com.bulk2.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.1"
+        versionCode 3 // updated from 2 to 3
+        versionName "3.0" // updated from 1.1 to 3.0
     }
     splits {
         abi {
