@@ -38,6 +38,7 @@ import {ActivityIndicator} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native';
 import TDLSItemView from '../TDLSListing/itemview/TdlsItemView';
+import {convertDateString} from '../appComponent/DateConversion';
 
 export default class Search extends Component {
   constructor(props) {
@@ -512,12 +513,6 @@ export default class Search extends Component {
   }
 
   print() {
-    function convertDateString(dateStr) {
-      if (!dateStr || isNaN(new Date(dateStr).getTime())) return '\n';
-      let date = moment(dateStr).local().format('YYYY-MM-DD hh:mm:ss a');
-      return date + '\n';
-    }
-
     let viePressUnit = this.state.printData.vie_press_start_unit + '\n';
     let vieLevelUnit =
       this.state.printData.vie_level_start_unit +
@@ -542,9 +537,15 @@ export default class Search extends Component {
     let vehiclenum = this.state.printData.vehicleno + '\n';
     let decantername = this.state.printData.DecanterName + '\n';
     let drivername = this.state.printData.DriverName + '\n';
-    let timein = convertDateString(this.state.printData.datein);
+    let timein = convertDateString(
+      this.state.printData.datein,
+      this.state.printData.timein,
+    );
     let inodometer = this.state.printData.odometerin + '\n';
-    let timeout = convertDateString(this.state.printData.dateout);
+    let timeout = convertDateString(
+      this.state.printData.dateout,
+      this.state.printData.timeout,
+    );
     let outodometer =
       this.state.printData.odometerout +
       '\n' +
@@ -582,8 +583,8 @@ export default class Search extends Component {
       : this.state.printData.Additional_Remarks + '\n';
     let sig = this.state.signatureUri;
 
-    console.log(timein);
-    console.log(timeout);
+    console.log('timein:', timein);
+    console.log('timeout:', timeout);
     console.log(viePressUnit);
     console.log(vieLevelUnit);
     console.log(tankerPressUnit);

@@ -41,6 +41,7 @@ import ImageResizer from 'react-native-image-resizer';
 import RadioButtonRN from 'radio-buttons-react-native';
 import ToastExample from '../config/ToastExample';
 import {openSettings} from 'react-native-permissions';
+import {convertDateString} from '../appComponent/DateConversion';
 
 export default class TDLSFormDecentre extends Component {
   constructor(props) {
@@ -1229,12 +1230,6 @@ export default class TDLSFormDecentre extends Component {
   }
 
   print() {
-    function convertDateString(dateStr) {
-      if (!dateStr || isNaN(new Date(dateStr).getTime())) return '\n';
-      let date = moment(dateStr).local().format('YYYY-MM-DD hh:mm:ss a');
-      return date + '\n';
-    }
-
     let viePressUnit = this.state.Vie_Press_Start_Unit + '\n';
     let vieLevelUnit =
       this.state.Vie_Level_Start_Unit +
@@ -1260,10 +1255,16 @@ export default class TDLSFormDecentre extends Component {
     let decantername = this.state.response.DecanterName + '\n';
     let drivername = this.state.response.DriverName + '\n';
     // let timein = this.state.Date_In + '\n';
-    let timein = convertDateString(this.state.Date_In);
+    let timein = convertDateString(
+      this.state.response.datein,
+      this.state.response.timein,
+    );
     let inodometer = this.state.odometerIn + '\n';
     // let timeout = this.state.Date_Out + '\n';
-    let timeout = convertDateString(this.state.Date_Out);
+    let timeout = convertDateString(
+      this.state.response.dateout,
+      this.state.response.timeout,
+    );
     let outodometer =
       this.state.odometerOut +
       '\n' +
@@ -1289,8 +1290,8 @@ export default class TDLSFormDecentre extends Component {
 
     console.log('scheduledate: ', tankerLevelUnit + '-' + contentUnit);
     // return
-    console.log(timein);
-    console.log(timeout);
+    console.log('timein:', timein);
+    console.log('timeout:', timeout);
     console.log(viePressUnit);
     console.log(vieLevelUnit);
     console.log(tankerPressUnit);

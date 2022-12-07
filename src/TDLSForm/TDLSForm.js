@@ -41,6 +41,7 @@ import {BASE_URL} from '../config/constant';
 import {getRemarksMaster} from '../config/constant';
 import {setDelivery} from '../config/constant';
 import {getAttachment} from '../config/constant';
+import {convertDateString} from '../appComponent/DateConversion';
 
 export default class TDLSForm extends Component {
   componentWillUnmount() {
@@ -551,12 +552,6 @@ export default class TDLSForm extends Component {
   }
 
   print() {
-    function convertDateString(dateStr) {
-      if (!dateStr || isNaN(new Date(dateStr).getTime())) return '\n';
-      let date = moment(dateStr).local().format('YYYY-MM-DD hh:mm:ss a');
-      return date + '\n';
-    }
-
     let viePressUnit = this.state.Vie_Press_Start_Unit + '\n';
     let vieLevelUnit =
       this.state.Vie_Level_Start_Unit +
@@ -581,17 +576,25 @@ export default class TDLSForm extends Component {
     let vehiclenum = this.state.response.vehicleno + '\n';
     let decantername = this.state.response.DecanterName + '\n';
     let drivername = this.state.response.DriverName + '\n';
-    let timein =
-      this.state.response.Trip_Status == 1 ||
-      this.state.response.Trip_Status == 3
-        ? convertDateString(this.state.Date_In)
-        : convertDateString(this.state.response.datein);
+    // let timein =
+    //   this.state.response.Trip_Status == 1 ||
+    //   this.state.response.Trip_Status == 3
+    //     ? convertDateString(this.state.Date_In)
+    //     : convertDateString(this.state.response.datein);
+    let timein = convertDateString(
+      this.state.response.datein,
+      this.state.response.timein,
+    );
     let inodometer = this.state.odometerIn + '\n';
-    let timeout =
-      this.state.response.Trip_Status == 1 ||
-      this.state.response.Trip_Status == 3
-        ? '\n'
-        : convertDateString(this.state.response.dateout);
+    // let timeout =
+    //   this.state.response.Trip_Status == 1 ||
+    //   this.state.response.Trip_Status == 3
+    //     ? '\n'
+    //     : convertDateString(this.state.response.dateout);
+    let timeout = convertDateString(
+      this.state.response.dateout,
+      this.state.response.timeout,
+    );
     let outodometer =
       this.state.odometerOut +
       '\n' +
@@ -621,8 +624,8 @@ export default class TDLSForm extends Component {
       ? this.state.Additional_Remarks
       : '\n';
 
-    console.log(timein);
-    console.log(timeout);
+    console.log('timein:', timein);
+    console.log('timeout:', timeout);
     console.log(viePressUnit);
     console.log(vieLevelUnit);
     console.log(tankerPressUnit);

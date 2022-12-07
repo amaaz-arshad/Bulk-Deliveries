@@ -36,6 +36,7 @@ import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import {ActivityIndicator} from 'react-native';
+import {convertDateString} from '../appComponent/DateConversion';
 
 export default class SearchDecentre extends Component {
   constructor(props) {
@@ -459,12 +460,6 @@ export default class SearchDecentre extends Component {
   }
 
   print() {
-    function convertDateString(dateStr) {
-      if (!dateStr || isNaN(new Date(dateStr).getTime())) return '\n';
-      let date = moment(dateStr).local().format('YYYY-MM-DD hh:mm:ss a');
-      return date + '\n';
-    }
-
     let viePressUnit = this.state.printData.vie_press_start_unit + '\n';
     let vieLevelUnit =
       this.state.printData.vie_level_start_unit +
@@ -489,10 +484,16 @@ export default class SearchDecentre extends Component {
     let vehiclenum = this.state.printData.vehicleno + '\n';
     let decantername = this.state.printData.DecanterName + '\n';
     let drivername = this.state.printData.DriverName + '\n';
-    let timein = convertDateString(this.state.printData.datein);
+    let timein = convertDateString(
+      this.state.printData.datein,
+      this.state.printData.timein,
+    );
     // let timein = this.state.printData.datein + '\n';
     let inodometer = this.state.printData.odometerin + '\n';
-    let timeout = convertDateString(this.state.printData.dateout);
+    let timeout = convertDateString(
+      this.state.printData.dateout,
+      this.state.printData.timeout,
+    );
     // let timeout = this.state.printData.dateout + '\n';
     let outodometer =
       this.state.printData.odometerout +
