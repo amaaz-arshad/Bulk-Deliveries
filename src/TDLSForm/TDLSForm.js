@@ -2504,7 +2504,14 @@ export default class TDLSForm extends Component {
                 baseColor={'#fff'}
                 iconColor={colors.grey}
                 placeholder={this.state.Tanker_Level_Start_Unit}
+                data={this.state.radioType == 2 ? tankerUnits : []}
                 underlineColor="transparent"
+                onChangeText={unit => {
+                  this.setState({
+                    Tanker_Level_Start_Unit: unit,
+                    Tanker_Level_End_Unit: unit,
+                  });
+                }}
                 value={this.state.unit_tanker_level_start}
               />
             </View>
@@ -2761,7 +2768,14 @@ export default class TDLSForm extends Component {
                 baseColor={'#fff'}
                 iconColor={colors.grey}
                 placeholder={this.state.Tanker_Level_End_Unit}
+                data={this.state.radioType == 2 ? tankerUnits : []}
                 underlineColor="transparent"
+                onChangeText={unit => {
+                  this.setState({
+                    Tanker_Level_End_Unit: unit,
+                    Tanker_Level_Start_Unit: unit,
+                  });
+                }}
                 value={this.state.unit_tanker_level_end}
               />
             </View>

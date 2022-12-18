@@ -186,6 +186,7 @@
   <com.google.android.instantapps/>
   <com.google.android.instantapps.thirdpartycompat/>
   <com.google.android.libraries.car/>
+  <com.google.android.libraries.cloud.telco.subgraph/>
   <com.google.android.libraries.enterprise.amapi/>
   <com.google.android.libraries.healthdata/>
   <com.google.android.libraries.maps/>

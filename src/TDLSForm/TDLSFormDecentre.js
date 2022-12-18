@@ -1913,7 +1913,7 @@ export default class TDLSFormDecentre extends Component {
                         res = this.removeMultiDotExceptfirst(
                           inp.replace(/[^0-9.]/g, ''),
                         );
-
+                        radioData;
                         this.setState({odometerOut: res});
 
                         this.saveFormOnFieldChange();
@@ -2482,6 +2482,7 @@ export default class TDLSFormDecentre extends Component {
   }
 
   tankerDataStart(pressureUnits, tankerUnits) {
+    console.log(tankerUnits);
     return (
       <View style={{flexDirection: 'column'}}>
         <View style={styles.twoInputFieldsStyle}>
@@ -2643,7 +2644,15 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_start
                     : 'unit'
                 }
+                data={this.state.radioType == 2 ? tankerUnits : []}
                 underlineColor="transparent"
+                onChangeText={unit => {
+                  this.setState({
+                    Tanker_Level_Start_Unit: unit,
+                    Tanker_Level_End_Unit: unit,
+                  });
+                  this.saveFormOnFieldChange();
+                }}
                 value={this.state.unit_tanker_level_start}
               />
             </View>
@@ -2663,6 +2672,7 @@ export default class TDLSFormDecentre extends Component {
             <TextInput
               keyboardType={'numeric'}
               editable={
+                this.props.ro &&
                 this.props.route.params.userData.Trip_Status != 1 &&
                 this.props.route.params.userData.Trip_Status != 3
                   ? false
@@ -3006,7 +3016,15 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_end
                     : 'unit'
                 }
+                data={this.state.radioType == 2 ? tankerUnits : []}
                 underlineColor="transparent"
+                onChangeText={unit => {
+                  this.setState({
+                    Tanker_Level_End_Unit: unit,
+                    Tanker_Level_Start_Unit: unit,
+                  });
+                  this.saveFormOnFieldChange();
+                }}
                 value={this.state.unit_tanker_level_end}
               />
             </View>

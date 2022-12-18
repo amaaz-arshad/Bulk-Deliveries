@@ -1303,6 +1303,7 @@ export default class Search extends Component {
             style={styles.input}
             keyboardType="numeric"
             placeholder="Enter TDLS No"
+            placeholderTextColor={colors.grey}
             value={this.state.tdlsNo}
             onChangeText={val => this.setState({tdlsNo: val})}
           />
@@ -1443,6 +1444,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     borderBottomLeftRadius: 5,
     borderTopLeftRadius: 5,
+    color: colors.black,
   },
   btn: {
     flex: 0.1,
