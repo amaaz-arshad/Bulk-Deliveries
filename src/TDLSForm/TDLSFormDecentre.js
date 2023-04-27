@@ -1583,8 +1583,8 @@ export default class TDLSFormDecentre extends Component {
       });
     } else {
       this.setState({
-        unit_tanker_level_start: 'KG',
-        unit_tanker_level_end: 'KG',
+        unit_tanker_level_start: 'INCH',
+        unit_tanker_level_end: 'INCH',
         unit_content_data: 'KG',
         Content_Diff_Unit: 'KG',
       });
@@ -1651,6 +1651,21 @@ export default class TDLSFormDecentre extends Component {
       },
       {
         value: 'KG',
+      },
+    ];
+
+    let tankerWeightUnits = [
+      {
+        value: 'INCH',
+      },
+      {
+        value: 'IWC',
+      },
+      {
+        value: 'MMWC',
+      },
+      {
+        value: 'MBWC',
       },
     ];
 
@@ -1913,7 +1928,7 @@ export default class TDLSFormDecentre extends Component {
                         res = this.removeMultiDotExceptfirst(
                           inp.replace(/[^0-9.]/g, ''),
                         );
-                        radioData;
+
                         this.setState({odometerOut: res});
 
                         this.saveFormOnFieldChange();
@@ -1949,7 +1964,7 @@ export default class TDLSFormDecentre extends Component {
                   Tanker Data (Start)
                 </Text>
 
-                {this.tankerDataStart(pressureUnits, tankerUnits)}
+                {this.tankerDataStart(pressureUnits, tankerWeightUnits)}
 
                 {/* VIE Data Level(Ends) */}
                 <Text style={styles.labelHeadingStyle}>VIE Data (Ends)</Text>
@@ -1959,7 +1974,7 @@ export default class TDLSFormDecentre extends Component {
                 {/* Tanker Data Level(Ends) */}
                 <Text style={styles.labelHeadingStyle}>Tanker Data (Ends)</Text>
 
-                {this.tankerDataEnds(pressureUnits, tankerUnits)}
+                {this.tankerDataEnds(pressureUnits, tankerWeightUnits)}
 
                 <Text style={styles.labelHeadingStyle}>Content Data</Text>
 
@@ -2481,8 +2496,8 @@ export default class TDLSFormDecentre extends Component {
     );
   }
 
-  tankerDataStart(pressureUnits, tankerUnits) {
-    console.log(tankerUnits);
+  tankerDataStart(pressureUnits, tankerWeightUnits) {
+    console.log(tankerWeightUnits);
     return (
       <View style={{flexDirection: 'column'}}>
         <View style={styles.twoInputFieldsStyle}>
@@ -2644,7 +2659,7 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_start
                     : 'unit'
                 }
-                data={this.state.radioType == 2 ? tankerUnits : []}
+                data={this.state.radioType == 2 ? tankerWeightUnits : []}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({
@@ -2672,7 +2687,6 @@ export default class TDLSFormDecentre extends Component {
             <TextInput
               keyboardType={'numeric'}
               editable={
-                this.props.ro &&
                 this.props.route.params.userData.Trip_Status != 1 &&
                 this.props.route.params.userData.Trip_Status != 3
                   ? false
@@ -2853,7 +2867,7 @@ export default class TDLSFormDecentre extends Component {
     );
   }
 
-  tankerDataEnds(pressureUnits, tankerUnits) {
+  tankerDataEnds(pressureUnits, tankerWeightUnits) {
     return (
       <View style={{flexDirection: 'column'}}>
         <View style={styles.twoInputFieldsStyle}>
@@ -3016,7 +3030,7 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_end
                     : 'unit'
                 }
-                data={this.state.radioType == 2 ? tankerUnits : []}
+                data={this.state.radioType == 2 ? tankerWeightUnits : []}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({

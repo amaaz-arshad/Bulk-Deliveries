@@ -813,8 +813,8 @@ export default class TDLSForm extends Component {
       });
     } else {
       this.setState({
-        unit_tanker_level_start: 'KG',
-        unit_tanker_level_end: 'KG',
+        unit_tanker_level_start: 'INCH',
+        unit_tanker_level_end: 'INCH',
         unit_content_data: 'KG',
         Content_Diff_Unit: 'KG',
       });
@@ -1559,6 +1559,21 @@ export default class TDLSForm extends Component {
       },
     ];
 
+    let tankerWeightUnits = [
+      {
+        value: 'INCH',
+      },
+      {
+        value: 'IWC',
+      },
+      {
+        value: 'MMWC',
+      },
+      {
+        value: 'MBWC',
+      },
+    ];
+
     let content_unit = [
       {
         value: 'M3',
@@ -1848,7 +1863,7 @@ export default class TDLSForm extends Component {
                   Tanker Data (Start)
                 </Text>
 
-                {this.tankerDataStart(pressureUnits, tankerUnits)}
+                {this.tankerDataStart(pressureUnits, tankerWeightUnits)}
 
                 {/* VIE Data Level(Ends) */}
                 <Text style={styles.labelHeadingStyle}>VIE Data (Ends)</Text>
@@ -1858,7 +1873,7 @@ export default class TDLSForm extends Component {
                 {/* Tanker Data Level(Ends) */}
                 <Text style={styles.labelHeadingStyle}>Tanker Data (Ends)</Text>
 
-                {this.tankerDataEnds(pressureUnits, tankerUnits)}
+                {this.tankerDataEnds(pressureUnits, tankerWeightUnits)}
 
                 <Text style={styles.labelHeadingStyle}>Content Data</Text>
 
