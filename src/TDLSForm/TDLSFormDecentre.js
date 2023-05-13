@@ -816,7 +816,11 @@ export default class TDLSFormDecentre extends Component {
           this.saveFormData([d]);
           this.saveSubmittedForminArray_toSendOnServer(d);
           this.props.route.params.onFormSubmission(true, []); //no response to replace with bcz of no internet thats why passing empty array[]
-          this.setState({hideSubmitBtn: true});
+          this.setState({
+            hideSubmitBtn: true,
+            response: {...this.state.response, Trip_Status: 5},
+          });
+          this.props.route.params.userData.Trip_Status = 5;
           BackHandler.removeEventListener(
             'hardwareBackPress',
             this.backPressDialog,
@@ -842,7 +846,11 @@ export default class TDLSFormDecentre extends Component {
               true,
               response.data.DeliveryList,
             );
-            this.setState({hideSubmitBtn: true});
+            this.setState({
+              hideSubmitBtn: true,
+              response: {...this.state.response, Trip_Status: 5},
+            });
+            this.props.route.params.userData.Trip_Status = 5;
             BackHandler.removeEventListener(
               'hardwareBackPress',
               this.backPressDialog,
@@ -1576,8 +1584,8 @@ export default class TDLSFormDecentre extends Component {
   onRadioBtnSelected(selectedVal) {
     if (selectedVal == 1) {
       this.setState({
-        unit_tanker_level_start: 'M3',
-        unit_tanker_level_end: 'M3',
+        unit_tanker_level_start: 'INCH',
+        unit_tanker_level_end: 'INCH',
         unit_content_data: 'M3',
         Content_Diff_Unit: 'M3',
       });
@@ -1735,25 +1743,7 @@ export default class TDLSFormDecentre extends Component {
 
             {this.props.route.params.userData.Trip_Status == 1 ||
             this.props.route.params.userData.Trip_Status == 3 ? (
-              <TouchableOpacity
-                style={{opacity: 0, height: 0}}
-                onPress={() => {
-                  if (this.props.route.params.userData.Signature > 0) {
-                    if (!this.state.signatureUri) this.getAttachmentForPrint();
-                    else this.bluetoothWorkForPrinter();
-                  } else {
-                    this.bluetoothWorkForPrinter();
-                  }
-                }}>
-                <Image
-                  source={require('../assets/print.png')}
-                  style={{
-                    padding: 5,
-                    width: 20,
-                    height: 20,
-                    marginEnd: 15,
-                  }}></Image>
-              </TouchableOpacity>
+              <TouchableOpacity />
             ) : (
               <TouchableOpacity
                 onPress={() => {
@@ -2659,7 +2649,7 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_start
                     : 'unit'
                 }
-                data={this.state.radioType == 2 ? tankerWeightUnits : []}
+                data={tankerWeightUnits}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({
@@ -3030,7 +3020,7 @@ export default class TDLSFormDecentre extends Component {
                     ? this.state.unit_tanker_level_end
                     : 'unit'
                 }
-                data={this.state.radioType == 2 ? tankerWeightUnits : []}
+                data={tankerWeightUnits}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({

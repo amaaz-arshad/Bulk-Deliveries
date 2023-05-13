@@ -806,8 +806,8 @@ export default class TDLSForm extends Component {
   onRadioBtnSelected(selectedVal) {
     if (selectedVal == 1) {
       this.setState({
-        unit_tanker_level_start: 'M3',
-        unit_tanker_level_end: 'M3',
+        unit_tanker_level_start: 'INCH',
+        unit_tanker_level_end: 'INCH',
         unit_content_data: 'M3',
         Content_Diff_Unit: 'M3',
       });
@@ -1629,20 +1629,7 @@ export default class TDLSForm extends Component {
 
             {this.props.route.params.userData.Trip_Status == 1 ||
             this.props.route.params.userData.Trip_Status == 3 ? (
-              <TouchableOpacity
-                style={{opacity: 0, height: 0}}
-                onPress={() => {
-                  if (this.props.route.params.userData.Signature > 0) {
-                    if (!this.state.signatureUri) this.getAttachmentForPrint();
-                    else this.bluetoothWorkForPrinter();
-                  } else {
-                    this.bluetoothWorkForPrinter();
-                  }
-                }}>
-                <Image
-                  source={require('../assets/print.png')}
-                  style={{width: 20, height: 20, marginEnd: 15}}></Image>
-              </TouchableOpacity>
+              <TouchableOpacity />
             ) : (
               <TouchableOpacity
                 onPress={() => {
@@ -2519,7 +2506,7 @@ export default class TDLSForm extends Component {
                 baseColor={'#fff'}
                 iconColor={colors.grey}
                 placeholder={this.state.Tanker_Level_Start_Unit}
-                data={this.state.radioType == 2 ? tankerUnits : []}
+                data={tankerUnits}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({
@@ -2783,7 +2770,7 @@ export default class TDLSForm extends Component {
                 baseColor={'#fff'}
                 iconColor={colors.grey}
                 placeholder={this.state.Tanker_Level_End_Unit}
-                data={this.state.radioType == 2 ? tankerUnits : []}
+                data={tankerUnits}
                 underlineColor="transparent"
                 onChangeText={unit => {
                   this.setState({
