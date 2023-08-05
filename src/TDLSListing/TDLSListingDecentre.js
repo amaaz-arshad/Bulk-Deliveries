@@ -33,6 +33,7 @@ import {Modal} from 'react-native-paper';
 import ToastExample from '../config/ToastExample';
 import {getAttachment} from '../config/constant';
 import {convertDateString} from '../appComponent/DateConversion';
+import { getComment } from '../appComponent/Comments';
 
 export default class TDLSListingDecentre extends Component {
   constructor(props) {
@@ -517,9 +518,13 @@ export default class TDLSListingDecentre extends Component {
       ' ' +
       this.state.printData.uom +
       '\n';
-    let comments = this.state.printData.Additional_Remarks
-      ? this.state.printData.Additional_Remarks
-      : '\n';
+    // let comments = this.state.printData.Additional_Remarks
+    //   ? this.state.printData.Additional_Remarks
+    //   : '\n';
+    let comments = getComment(
+      this.state.printData.Additional_Remarks,
+      this.state.printData.TDLSRemarks,
+    );
     let sig =
       this.state.printData.Signature.length > 100
         ? this.state.printData.Signature
@@ -541,6 +546,8 @@ export default class TDLSListingDecentre extends Component {
     console.log('net weight: ', netweight);
     console.log('deliveredvolume: ', deliveredvolume);
     console.log('sign: ', this.state.signatureUri);
+    console.log("comments: ", comments);
+    console.log("tdls remarks: ", this.state.printData.TDLSRemarks);
     console.log(
       'CalculationBaseType: ',
       this.state.printData.CalculationBaseType,

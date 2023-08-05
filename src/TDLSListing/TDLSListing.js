@@ -35,6 +35,7 @@ import {requestMultiple, PERMISSIONS} from 'react-native-permissions';
 import TDLSForm from '../TDLSForm/TDLSForm';
 import ToastExample from '../config/ToastExample';
 import {convertDateString} from '../appComponent/DateConversion';
+import { getComment } from '../appComponent/Comments';
 
 export default class TDLSListing extends Component {
   constructor(props) {
@@ -570,13 +571,17 @@ export default class TDLSListing extends Component {
       this.state.printData.uom +
       '\n';
     //let deliveredvolume = this.state.printData.tanker_content_diff + " " + 'M3' + '\n';
-    let comments = !this.state.printData.Additional_Remarks
-      ? '\n'
-      : this.state.printData.Additional_Remarks + '\n';
+    // let comments = !this.state.printData.Additional_Remarks
+    //   ? '\n'
+    //   : this.state.printData.Additional_Remarks + '\n';
+    let comments = getComment(
+      this.state.printData.Additional_Remarks,
+      this.state.printData.TDLSRemarks,
+    );
     let sig = this.state.signatureUri;
 
-    console.log("timein:",timein);
-    console.log("timeout:",timeout);
+    console.log('timein:', timein);
+    console.log('timeout:', timeout);
     console.log(viePressUnit);
     console.log(vieLevelUnit);
     console.log(tankerPressUnit);
@@ -589,6 +594,8 @@ export default class TDLSListing extends Component {
     console.log('net weight: ', netweight);
     console.log('deliveredvolume: ', deliveredvolume);
     console.log('sign: ', this.state.signatureUri);
+    console.log('comments: ', comments);
+    console.log('tdls remarks: ', this.state.printData.TDLSRemarks);
     console.log(
       'CalculationBaseType: ',
       this.state.printData.CalculationBaseType,

@@ -42,6 +42,7 @@ import RadioButtonRN from 'radio-buttons-react-native';
 import ToastExample from '../config/ToastExample';
 import {openSettings} from 'react-native-permissions';
 import {convertDateString} from '../appComponent/DateConversion';
+import {getComment} from '../appComponent/Comments';
 
 export default class TDLSFormDecentre extends Component {
   constructor(props) {
@@ -1264,15 +1265,15 @@ export default class TDLSFormDecentre extends Component {
     let drivername = this.state.response.DriverName + '\n';
     // let timein = this.state.Date_In + '\n';
     let timein = convertDateString(
-      this.state.response.datein,
-      this.state.response.timein,
+      this.state.Date_In || this.state.response.datein,
+      this.state.Time_In || this.state.response.timein,
     );
-    let inodometer = this.state.odometerIn + '\n';
     // let timeout = this.state.Date_Out + '\n';
     let timeout = convertDateString(
-      this.state.response.dateout,
-      this.state.response.timeout,
+      this.state.Date_Out || this.state.response.dateout,
+      this.state.Time_Out || this.state.response.timeout,
     );
+    let inodometer = this.state.odometerIn + '\n';
     let outodometer =
       this.state.odometerOut +
       '\n' +
@@ -1292,25 +1293,39 @@ export default class TDLSFormDecentre extends Component {
 
     let deliveredvolume =
       this.state.Content_Diff + ' ' + this.state.Content_Diff_Unit + '\n';
-    let comments = this.state.Additional_Remarks
-      ? this.state.Additional_Remarks
-      : '\n';
+    // let comments = this.state.Additional_Remarks
+    //   ? this.state.Additional_Remarks
+    //   : '\n';
+    let comments = getComment(
+      this.state.Additional_Remarks,
+      this.state.preFilledRemarks,
+    );
 
     console.log('scheduledate: ', tankerLevelUnit + '-' + contentUnit);
     // return
+    console.log('this.state.Date_In: ', this.state.Date_In);
+    console.log('this.state.Date_Out: ', this.state.Date_Out);
+    console.log('this.state.Time_In: ', this.state.Time_In);
+    console.log('this.state.Time_Out: ', this.state.Time_Out);
+    console.log('this.state.response.datein: ', this.state.response.datein);
+    console.log('this.state.response.dateout: ', this.state.response.dateout);
+    console.log('this.state.response.timein: ', this.state.response.timein);
+    console.log('this.state.response.timeout: ', this.state.response.timeout);
     console.log('timein:', timein);
     console.log('timeout:', timeout);
-    console.log(viePressUnit);
-    console.log(vieLevelUnit);
-    console.log(tankerPressUnit);
-    console.log(tankerLevelUnit);
-    console.log(contentUnit);
+    console.log("viePressUnit:", viePressUnit);
+    console.log('vieLevelUnit:', vieLevelUnit);
+    console.log('tankerPressUnit:', tankerPressUnit);
+    console.log('tankerLevelUnit:', tankerLevelUnit);
+    console.log('contentUnit:', contentUnit);
     console.log('bttrno:', bttrno);
-    console.log(tdlsno);
+    console.log("tdlsno:'", tdlsno);
     console.log('vie:', vie);
     console.log('diff: ', diff);
     console.log('net weight: ', netweight);
     console.log('deliveredvolume: ', deliveredvolume);
+    console.log('drivername: ', drivername);
+    console.log('decantername: ', decantername);
     console.log('sign: ', this.state.signatureUri);
     console.log(
       'CalculationBaseType: ',
@@ -1320,7 +1335,18 @@ export default class TDLSFormDecentre extends Component {
       'CalculationBaseType id: ',
       this.state.response.CalculationBaseTypeID,
     );
+    console.log('comments: ', comments);
+    console.log('tdls remarks: ', this.state.preFilledRemarks);
     console.log('radio type: ', this.state.radioType);
+
+    // new print data console
+    // console.log('*********************PRINT DATA START**************************\n')
+    // console.log('bttr no: ', bttrno)
+    // console.log('tdls no: ', tdlsno)
+    // console.log('customer code: ', customerno)
+    // console.log('name: ', customername)
+    // console.log('vie: ', vie)
+    // console.log('\n*********************PRINT DATA END**************************')
 
     ToastExample.show(
       this.state.Vie_Press_Start + '',

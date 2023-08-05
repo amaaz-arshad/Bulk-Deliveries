@@ -1,6 +1,13 @@
 import moment from 'moment';
 
 export function convertDateString(dateStr, timeStr) {
+  const isDateFormatCorrect = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (am|pm)$/i.test(dateStr);
+  // const isTimeFormatCorrect = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (am|pm)$/i.test(timeStr);
+
+  if (isDateFormatCorrect) {
+    return dateStr + '\n';
+  }
+
   if (
     dateStr &&
     !isNaN(new Date(dateStr).getTime()) &&

@@ -42,6 +42,7 @@ import {getRemarksMaster} from '../config/constant';
 import {setDelivery} from '../config/constant';
 import {getAttachment} from '../config/constant';
 import {convertDateString} from '../appComponent/DateConversion';
+import {getComment} from '../appComponent/Comments';
 
 export default class TDLSForm extends Component {
   componentWillUnmount() {
@@ -582,19 +583,19 @@ export default class TDLSForm extends Component {
     //     ? convertDateString(this.state.Date_In)
     //     : convertDateString(this.state.response.datein);
     let timein = convertDateString(
-      this.state.response.datein,
-      this.state.response.timein,
+      this.state.Date_In || this.state.response.datein,
+      this.state.Time_In || this.state.response.timein,
     );
-    let inodometer = this.state.odometerIn + '\n';
     // let timeout =
     //   this.state.response.Trip_Status == 1 ||
     //   this.state.response.Trip_Status == 3
     //     ? '\n'
     //     : convertDateString(this.state.response.dateout);
     let timeout = convertDateString(
-      this.state.response.dateout,
-      this.state.response.timeout,
+      this.state.Date_Out || this.state.response.dateout,
+      this.state.Time_Out || this.state.response.timeout,
     );
+    let inodometer = this.state.odometerIn + '\n';
     let outodometer =
       this.state.odometerOut +
       '\n' +
@@ -620,24 +621,36 @@ export default class TDLSForm extends Component {
     //         '\n';
 
     let deliveredvolume = this.state.Content_Diff + '' + ' M3' + '\n';
-    let comments = this.state.Additional_Remarks
-      ? this.state.Additional_Remarks
-      : '\n';
+    // let comments = this.state.Additional_Remarks
+    //   ? this.state.Additional_Remarks
+    //   : '\n';
+    let comments = getComment(
+      this.state.Additional_Remarks,
+      this.state.preFilledRemarks,
+    );
 
+    console.log('this.state.Date_In: ', this.state.Date_In);
+    console.log('this.state.Date_Out: ', this.state.Date_Out);
+    console.log('this.state.Time_In: ', this.state.Time_In);
+    console.log('this.state.Time_Out: ', this.state.Time_Out);
     console.log('timein:', timein);
     console.log('timeout:', timeout);
-    console.log(viePressUnit);
-    console.log(vieLevelUnit);
-    console.log(tankerPressUnit);
-    console.log(tankerLevelUnit);
-    console.log(contentUnit);
+    console.log('viePressUnit:', viePressUnit);
+    console.log('vieLevelUnit:', vieLevelUnit);
+    console.log('tankerPressUnit:', tankerPressUnit);
+    console.log('tankerLevelUnit:', tankerLevelUnit);
+    console.log('contentUnit:', contentUnit);
     console.log('bttrno:', bttrno);
-    console.log(tdlsno);
+    console.log("tdlsno:'", tdlsno);
     console.log('vie:', vie);
     console.log('diff: ', diff);
     console.log('net weight: ', netweight);
     console.log('deliveredvolume: ', deliveredvolume);
     console.log('sign: ', this.state.signatureUri);
+    console.log('comments: ', comments);
+    console.log('tdls remarks: ', this.state.preFilledRemarks);
+    console.log('drivername: ', drivername);
+    console.log('decantername: ', decantername);
     console.log(
       'CalculationBaseType: ',
       this.state.response.CalculationBaseType,
